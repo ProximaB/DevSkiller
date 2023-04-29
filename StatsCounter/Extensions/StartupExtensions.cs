@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using StatsCounter.Services;
 
 namespace StatsCounter.Extensions
 {
@@ -9,7 +10,17 @@ namespace StatsCounter.Extensions
             this IServiceCollection services,
             Uri baseApiUrl)
         {
-            return services; // TODO: add your code here
+            services.AddHttpClient("GitHubClient", client =>
+            {
+                client.BaseAddress = baseApiUrl;
+                client.DefaultRequestHeaders.Add("Accept", "application/vnd.github+json");
+                client.DefaultRequestHeaders.Add("User-Agent", "StatsCounter");
+            });
+            
+            services.AddSingleton<IGitHubService, GitHubService>();
+            
+
+            return services;
         }
     }
 }

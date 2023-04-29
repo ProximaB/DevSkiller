@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
@@ -24,7 +25,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -33,7 +34,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.Owner.Should().Be("owner");
@@ -44,7 +45,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -53,7 +54,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.Letters.Should().BeEquivalentTo(
@@ -76,7 +77,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -85,7 +86,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.AvgStargazers.Should().BeApproximately(15.0, 1e-6);
@@ -96,7 +97,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(),CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -105,7 +106,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.AvgWatchers.Should().BeApproximately(15.0, 1e-6);
@@ -116,7 +117,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -125,7 +126,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.AvgForks.Should().BeApproximately(15.0, 1e-6);
@@ -136,7 +137,7 @@ namespace StatsCounter.Tests.Unit
         {
             // given
             _gitHubService
-                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>()))
+                .Setup(s => s.GetRepositoryInfosByOwnerAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync(
                     new List<RepositoryInfo>
                     {
@@ -145,7 +146,7 @@ namespace StatsCounter.Tests.Unit
                     });
 
             // when
-            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner");
+            var result = await _statsService.GetRepositoryStatsByOwnerAsync("owner", CancellationToken.None);
 
             // then
             result.AvgSize.Should().BeApproximately(15.0, 1e-6);
